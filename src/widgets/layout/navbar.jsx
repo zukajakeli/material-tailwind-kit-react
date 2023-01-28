@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getAuth, signOut } from "firebase/auth";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Navbar as MTNavbar,
   MobileNav,
@@ -9,11 +10,32 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useUser } from "@/context/context";
+
+import "../styles/navbar.css";
 
 export function Navbar({ brandName, routes, action }) {
+  const navigate = useNavigate();
+  const auth = getAuth();
   const [openNav, setOpenNav] = React.useState(false);
+  const email = useUser((state) => state.email);
+  const resetUser = useUser((state) => state.reset);
+  const isAuthenticated = email.length > 0;
 
-  React.useEffect(() => {
+  const isHidden = (path) =>
+    isAuthenticated && (path === "/sign-up" || path === "/sign-in");
+
+  const actionBtnHandler = () => {
+    isAuthenticated
+      ? signOut(auth).then(() => {
+          localStorage.setItem("authToken", "");
+          navigate("/home");
+          resetUser();
+        })
+      : navigate("/sign-up");
+  };
+
+  useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false)
@@ -24,7 +46,7 @@ export function Navbar({ brandName, routes, action }) {
     <ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       {routes.map(({ name, path, icon, href, target }) => (
         <Typography
-          key={name}
+          key={path}
           as="li"
           variant="small"
           color="inherit"
@@ -43,20 +65,27 @@ export function Navbar({ brandName, routes, action }) {
               {name}
             </a>
           ) : (
-            <Link
-              to={path}
-              target={target}
-              className="flex items-center gap-1 p-1 font-normal"
-            >
-              {icon &&
-                React.createElement(icon, {
-                  className: "w-[18px] h-[18px] opacity-75 mr-1",
-                })}
-              {name}
-            </Link>
+            !isHidden(path) && (
+              <Link
+                to={path}
+                target={target}
+                className="flex items-center gap-1 p-1 font-normal"
+              >
+                {icon &&
+                  React.createElement(icon, {
+                    className: "w-[18px] h-[18px] opacity-75 mr-1",
+                  })}
+                <Typography variant="small" id="nav-item-important">
+                  {name}
+                </Typography>
+              </Link>
+            )
           )}
         </Typography>
       ))}
+      <Button variant="gradient" size="sm" fullWidth onClick={actionBtnHandler}>
+        {isAuthenticated ? "გამოსვლა" : "გაწევრიანდი"}
+      </Button>
     </ul>
   );
 
@@ -70,14 +99,6 @@ export function Navbar({ brandName, routes, action }) {
         </Link>
         <div className="hidden lg:block">{navList}</div>
         <div className="hidden gap-2 lg:flex">
-          <a
-            href="https://www.material-tailwind.com/blocks?ref=mtkr"
-            target="_blank"
-          >
-            <Button variant="text" size="sm" color="white" fullWidth>
-              pro version
-            </Button>
-          </a>
           {React.cloneElement(action, {
             className: "hidden lg:inline-block",
           })}
@@ -102,15 +123,6 @@ export function Navbar({ brandName, routes, action }) {
       >
         <div className="container mx-auto">
           {navList}
-          <a
-            href="https://www.material-tailwind.com/blocks/react?ref=mtkr"
-            target="_blank"
-            className="mb-2 block"
-          >
-            <Button variant="text" size="sm" fullWidth>
-              pro version
-            </Button>
-          </a>
           {React.cloneElement(action, {
             className: "w-full block",
           })}
@@ -121,17 +133,8 @@ export function Navbar({ brandName, routes, action }) {
 }
 
 Navbar.defaultProps = {
-  brandName: "Material Tailwind React",
-  action: (
-    <a
-      href="https://www.creative-tim.com/product/material-tailwind-kit-react"
-      target="_blank"
-    >
-      <Button variant="gradient" size="sm" fullWidth>
-        free download
-      </Button>
-    </a>
-  ),
+  brandName: "House of Jakeli",
+  action: <a href="/profile"></a>,
 };
 
 Navbar.propTypes = {

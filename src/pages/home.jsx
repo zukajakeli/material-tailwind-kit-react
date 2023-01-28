@@ -18,8 +18,8 @@ export function Home() {
   return (
     <>
       <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32">
-        <div className="absolute top-0 h-full w-full bg-[url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80')] bg-cover bg-center" />
-        <div className="absolute top-0 h-full w-full bg-black/75 bg-cover bg-center" />
+        <div className="absolute top-0 h-full w-full bg-[url('https://www.turebi.ge/uploads/photos/tours1/large/59692_1.jpg')] bg-cover bg-center" />
+        <div className="absolute top-0 h-full w-full bg-black/50 bg-cover bg-center" />
         <div className="max-w-8xl container relative mx-auto">
           <div className="flex flex-wrap items-center">
             <div className="ml-auto mr-auto w-full px-4 text-center lg:w-8/12">
@@ -28,7 +28,7 @@ export function Home() {
                 color="white"
                 className="mb-6 font-black"
               >
-                Your story starts with us.
+                ჯაყელთა სახლი
               </Typography>
               <Typography variant="lead" color="white" className="opacity-80">
                 This is a simple example of a Landing Page you can build using
@@ -108,7 +108,7 @@ export function Home() {
       </section>
       <section className="px-4 pt-20 pb-48">
         <div className="container mx-auto">
-          <PageTitle heading="Here are our heroes">
+          <PageTitle heading="ჩვენი წევრები">
             According to the National Oceanic and Atmospheric Administration,
             Ted, Scambos, NSIDClead scentist, puts the potentially record
             maximum.
@@ -134,7 +134,7 @@ export function Home() {
           </div>
         </div>
       </section>
-      <section className="relative bg-blue-gray-50/50 py-24 px-4">
+      {/* <section className="relative bg-blue-gray-50/50 py-24 px-4">
         <div className="container mx-auto">
           <PageTitle heading="Build something">
             Put the potentially record low maximum sea ice extent tihs year down
@@ -163,21 +163,8 @@ export function Home() {
               </Card>
             ))}
           </div>
-          <PageTitle heading="Want to work with us?">
-            Complete this form and we will get back to you in 24 hours.
-          </PageTitle>
-          <form className="mx-auto mt-12 max-w-3xl text-center">
-            <div className="mb-8 flex gap-8">
-              <Input variant="standard" size="lg" label="Full Name" />
-              <Input variant="standard" size="lg" label="Email Address" />
-            </div>
-            <Textarea variant="standard" size="lg" label="Message" rows={8} />
-            <Button variant="gradient" size="lg" className="mt-8">
-              Send Message
-            </Button>
-          </form>
         </div>
-      </section>
+      </section> */}
       <div className="bg-blue-gray-50/50">
         <Footer />
       </div>

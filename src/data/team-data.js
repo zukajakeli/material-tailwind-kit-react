@@ -1,7 +1,7 @@
 export const teamData = [
   {
     img: "/img/team-1.jpg",
-    name: "Ryan Tompson",
+    name: "ყვარყვარე ჯაყელი",
     position: "Web Developer",
     socials: [
       {
@@ -20,7 +20,7 @@ export const teamData = [
   },
   {
     img: "/img/team-2.jpg",
-    name: "Romina Hadid",
+    name: "ნათელა ჯაყელი",
     position: "Marketing Specialist",
     socials: [
       {
@@ -39,7 +39,7 @@ export const teamData = [
   },
   {
     img: "/img/team-3.jpg",
-    name: "Alexa Smith",
+    name: "ბექა ჯაყელი",
     position: "UI/UX Designer",
     socials: [
       {
@@ -58,7 +58,7 @@ export const teamData = [
   },
   {
     img: "/img/team-4.png",
-    name: "Jenna Kardi",
+    name: "ბოცო ჯაყელი :)",
     position: "Founder and CEO",
     socials: [
       {
