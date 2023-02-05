@@ -1,14 +1,31 @@
 import PropTypes from "prop-types";
 import { Card, Avatar, Typography } from "@material-tailwind/react";
+import { BASE_URL } from "@/api/apiClient";
+import profileImage from "../../../public/img/profile-placeholder.png";
+import { useNavigate } from "react-router-dom";
 
-export function TeamCard({ img, name, position, socials }) {
+export function TeamCard({ img, name, position, socials, uid }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/profile/${uid}`);
+  };
   return (
-    <Card color="transparent" shadow={false} className="text-center">
+    <Card
+      color="transparent"
+      shadow={false}
+      className="text-center"
+      onClick={handleClick}
+    >
       <Avatar
-        src={img}
+        src={img.length > 0 ? `${BASE_URL}/images/${img}` : profileImage}
         alt={name}
         size="xxl"
         className="h-full w-full shadow-lg shadow-gray-500/25"
+        style={{
+          objectFit: img.length > 0 ? "cover" : "contain",
+          cursor: "pointer",
+        }}
       />
       <Typography variant="h5" color="blue-gray" className="mt-6 mb-1">
         {name}

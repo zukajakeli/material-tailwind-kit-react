@@ -23,7 +23,8 @@ export function Navbar({ brandName, routes, action }) {
   const isAuthenticated = email.length > 0;
 
   const isHidden = (path) =>
-    isAuthenticated && (path === "/sign-up" || path === "/sign-in");
+    (isAuthenticated && (path === "/sign-up" || path === "/sign-in")) ||
+    (!isAuthenticated && path === "/profile");
 
   const actionBtnHandler = () => {
     isAuthenticated

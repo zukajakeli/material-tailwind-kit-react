@@ -1,4 +1,12 @@
-import { Home, Profile, SignIn, SignUp, ProfileEdit, AboutUs } from "@/pages";
+import {
+  Home,
+  Profile,
+  SignIn,
+  SignUp,
+  ProfileEdit,
+  AboutUs,
+  Members,
+} from "@/pages";
 import {
   HomeIcon,
   UserCircleIcon,
@@ -26,7 +34,7 @@ export const routes = [
     icon: IdentificationIcon,
     name: "წევრები",
     path: "/members",
-    element: <Home />,
+    element: <Members />,
   },
   {
     icon: UserCircleIcon,
@@ -34,15 +42,10 @@ export const routes = [
     path: "/profile",
     element: <Profile />,
   },
-  {
-    icon: null,
-    name: "",
-    path: "/profile-edit",
-    element: <ProfileEdit />,
-  },
+
   {
     icon: ArrowRightOnRectangleIcon,
-    name: "Sign In",
+    name: "ავტორიზაცია",
     path: "/sign-in",
     element: <SignIn />,
   },

@@ -6,12 +6,14 @@ export const useUser = create((set) => ({
   token: "",
   uid: "",
   email: "",
+  isAuthenticated: false,
   setUserInfo: (payload) =>
     set((state) => ({
       ...state,
       token: payload.accessToken,
       uid: payload.uid,
       email: payload.email,
+      isAuthenticated: true,
     })),
 
   reset: () => {

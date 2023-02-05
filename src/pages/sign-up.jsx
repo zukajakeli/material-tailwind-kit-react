@@ -22,7 +22,6 @@ export function SignUp() {
 
   const formik = useFormik({
     initialValues: {
-      userName: "",
       email: "",
       password: "",
     },
@@ -66,15 +65,6 @@ export function SignUp() {
 
           <form className="w-full max-w-lg" onSubmit={formik.handleSubmit}>
             <CardBody className="flex flex-col gap-4">
-              <Input
-                variant="standard"
-                label="Name"
-                size="lg"
-                id="userName"
-                value={formik.values.userName}
-                onChange={formik.handleChange}
-                error={Boolean(formik.errors.userName)}
-              />
               <Input
                 variant="standard"
                 type="email"

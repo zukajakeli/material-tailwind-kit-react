@@ -5,6 +5,15 @@ import { Navbar } from "@/widgets/layout";
 import routes from "@/routes";
 import "../firebase.config";
 import { useUser } from "./context/context";
+import {
+  AboutUs,
+  Home,
+  Members,
+  Profile,
+  ProfileEdit,
+  SignIn,
+  SignUp,
+} from "./pages";
 
 function App() {
   const auth = getAuth();
@@ -22,7 +31,7 @@ function App() {
         localStorage.setItem("authToken", "");
       }
     });
-  }, [auth]);
+  }, []);
 
   return (
     <>
@@ -30,10 +39,18 @@ function App() {
         <Navbar routes={routes} />
       </div>
       <Routes>
-        {routes.map(
-          ({ path, element }, key) =>
-            element && <Route key={key} exact path={path} element={element} />
-        )}
+        <Route path="/home" element={<Home />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/members" element={<Members />} />
+        <Route path="profile">
+          <Route path=":userId?" element={<Profile />} />
+          <Route path="" element={<Profile />} />
+        </Route>
+
+        <Route path="/profile-edit" element={<ProfileEdit />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </>

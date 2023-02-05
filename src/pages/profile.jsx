@@ -1,10 +1,6 @@
 import { Avatar, Typography, Button } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
-import {
-  MapPinIcon,
-  BriefcaseIcon,
-  BuildingLibraryIcon,
-} from "@heroicons/react/24/solid";
+import { useNavigate, useParams } from "react-router-dom";
+import { MapPinIcon } from "@heroicons/react/24/solid";
 import { Footer } from "@/widgets/layout";
 import { useEffect, useState } from "react";
 import { api, BASE_URL } from "@/api/apiClient";
@@ -12,6 +8,7 @@ import endpoints from "@/api/endpoints";
 import profileImage from "../../public/img/profile-placeholder.png";
 
 export function Profile() {
+  const { userId } = useParams();
   const [userData, setUserData] = useState({
     name: "",
     surname: "",
@@ -26,8 +23,10 @@ export function Profile() {
   const clickHandler = () => navigate("/profile-edit");
 
   useEffect(() => {
-    api.get(endpoints.GET_USER).then((res) => setUserData(res.data));
-  }, []);
+    api
+      .get(`${endpoints.GET_USER}/${userId || ""}`)
+      .then((res) => setUserData(res.data));
+  }, [userId]);
 
   return (
     <>
@@ -56,60 +55,17 @@ export function Profile() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-10 flex w-full justify-center px-4 lg:order-3 lg:mt-0 lg:w-4/12 lg:justify-end lg:self-center">
-                  <Button className="bg-blue-400" onClick={clickHandler}>
-                    რედაქტირება
-                  </Button>
-                </div>
-                <div className="w-full px-4 lg:order-1 lg:w-4/12">
-                  {/* <div className="flex justify-center py-4 pt-8 lg:pt-4">
-                    <div className="mr-4 p-3 text-center">
-                      <Typography
-                        variant="lead"
-                        color="blue-gray"
-                        className="font-bold uppercase"
-                      >
-                        22
-                      </Typography>
-                      <Typography
-                        variant="small"
-                        className="font-normal text-blue-gray-500"
-                      >
-                        Friends
-                      </Typography>
-                    </div>
-                    <div className="mr-4 p-3 text-center">
-                      <Typography
-                        variant="lead"
-                        color="blue-gray"
-                        className="font-bold uppercase"
-                      >
-                        10
-                      </Typography>
-                      <Typography
-                        variant="small"
-                        className="font-normal text-blue-gray-500"
-                      >
-                        Photos
-                      </Typography>
-                    </div>
-                    <div className="p-3 text-center lg:mr-4">
-                      <Typography
-                        variant="lead"
-                        color="blue-gray"
-                        className="font-bold uppercase"
-                      >
-                        89
-                      </Typography>
-                      <Typography
-                        variant="small"
-                        className="font-normal text-blue-gray-500"
-                      >
-                        Comments
-                      </Typography>
-                    </div>
-                  </div> */}
-                </div>
+                {
+                  <div className="mt-10 flex w-full justify-center px-4 lg:order-3 lg:mt-0 lg:w-4/12 lg:justify-end lg:self-center">
+                    {!userId && (
+                      <Button className="bg-blue-400" onClick={clickHandler}>
+                        რედაქტირება
+                      </Button>
+                    )}
+                  </div>
+                }
+
+                <div className="w-full px-4 lg:order-1 lg:w-4/12"></div>
               </div>
               <div className="my-8 text-center">
                 <Typography variant="h2" color="blue-gray" className="mb-2">
@@ -121,18 +77,6 @@ export function Profile() {
                     {`${location}, ${birthYear}`}
                   </Typography>
                 </div>
-                {/* <div className="mb-2 flex items-center justify-center gap-2">
-                  <BriefcaseIcon className="-mt-px h-4 w-4 text-blue-gray-700" />
-                  <Typography className="font-medium text-blue-gray-700">
-                    Solution Manager - Creative Tim Officer
-                  </Typography>
-                </div>
-                <div className="mb-2 flex items-center justify-center gap-2">
-                  <BuildingLibraryIcon className="-mt-px h-4 w-4 text-blue-gray-700" />
-                  <Typography className="font-medium text-blue-gray-700">
-                    University of Computer Science
-                  </Typography>
-                </div> */}
               </div>
 
               <div className="mb-10 border-t border-blue-gray-50 py-6 text-center">

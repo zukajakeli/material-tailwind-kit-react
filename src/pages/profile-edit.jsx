@@ -1,13 +1,21 @@
-import { Avatar, Textarea, Button, Input } from "@material-tailwind/react";
+import {
+  Avatar,
+  Textarea,
+  Button,
+  Input,
+  Alert,
+} from "@material-tailwind/react";
 import { useFormik } from "formik";
-import { api } from "@/api/apiClient";
+import { api, BASE_URL } from "@/api/apiClient";
 import endpoints from "@/api/endpoints";
 import { useEffect, useState } from "react";
 import profileImage from "../../public/img/profile-placeholder.png";
 import { Footer } from "@/widgets/layout";
+import "../../public/css/profile-edit.css";
 
 export function ProfileEdit() {
   const [image, setImage] = useState({ preview: "", data: "" });
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
     surname: "",
@@ -15,8 +23,10 @@ export function ProfileEdit() {
     birthYear: "",
     bio: "",
     fbLink: "",
+    imageUrl: "",
   });
-  const { name, surname, location, birthYear, bio, fbLink } = userData;
+  const { name, surname, location, birthYear, bio, fbLink, imageUrl } =
+    userData;
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -26,18 +36,16 @@ export function ProfileEdit() {
       birthYear,
       location,
       bio,
+      imageUrl,
     },
     onSubmit: (values) => {
       console.log("bio", values);
-      let formData = new FormData();
-      formData.append("image", image.data);
+      const formData = new FormData();
       Object.keys(values).forEach((key) => {
-        formData.append(`${key}`, "blaa");
+        formData.append(`${key}`, values[key]);
       });
-      for (const p of formData) {
-        console.log("formdata", p);
-      }
-      api.post(endpoints.UPDATE_USER, formData);
+      formData.append("image", image.data);
+      api.post(endpoints.UPDATE_USER, formData).then(() => showAlert());
     },
   });
 
@@ -49,12 +57,31 @@ export function ProfileEdit() {
     setImage(img);
   };
 
+  const showAlert = () => {
+    setIsAlertVisible(true);
+    setTimeout(() => {
+      setIsAlertVisible(false);
+    }, 4000);
+  };
+
   useEffect(() => {
-    api.get(endpoints.GET_USER).then((res) => setUserData(res.data));
+    api.get(endpoints.GET_USER).then((res) => {
+      setUserData(res.data);
+    });
   }, []);
 
   return (
     <>
+      <div id="profile-alert">
+        <Alert
+          color="green"
+          // dismissible={{ onClose: () => setIsAlertVisible(false) }}
+          show={isAlertVisible}
+        >
+          პროფილი განახლდა წარმატებით!
+        </Alert>
+      </div>
+
       <section className="relative block h-[50vh]">
         <div className="bg-profile-background absolute top-0 h-full w-full bg-[url('/img/background-1.jpg')] bg-cover bg-center" />
         <div className="absolute top-0 h-full w-full bg-black/75 bg-cover bg-center" />
@@ -62,14 +89,20 @@ export function ProfileEdit() {
       <section className="relative bg-blue-gray-50/50 py-16 px-4">
         <div className="container mx-auto">
           <div className="relative mb-6 -mt-64 flex w-full min-w-0 flex-col break-words rounded-3xl bg-white shadow-xl shadow-gray-500/5">
-            <form onSubmit={formik.handleSubmit} enctype="multipart/form-data">
+            <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
               <div className="px-6">
                 <div className="flex flex-wrap justify-center">
                   <div className="flex w-full justify-center px-4 lg:order-2 lg:w-3/12">
                     <div className="relative">
                       <div className="-mt-20 w-40">
                         <Avatar
-                          src={image.preview ? image.preview : profileImage}
+                          src={
+                            image.preview
+                              ? image.preview
+                              : imageUrl
+                              ? `${BASE_URL}/images/${imageUrl}`
+                              : profileImage
+                          }
                           alt="Profile picture"
                           variant="circular"
                           className="h-full w-full shadow-xl"
