@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardBody,
   CardHeader,
   Typography,
   Button,
-  IconButton,
-  Input,
-  Textarea,
 } from "@material-tailwind/react";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { PageTitle, Footer } from "@/widgets/layout";
 import { FeatureCard, TeamCard } from "@/widgets/cards";
-import { featuresData, teamData, contactData } from "@/data";
 import { api } from "@/api/apiClient";
 import endpoints from "@/api/endpoints";
+import jakeliGerbi from "../../public/img/jakeli-gerbi.png";
+import safara from "../../public/img/safara-beqa.jpeg";
+import samcxeGerbi from "../../public/img/samcxe-drosha.png";
+import jakisCixe from "../../public/img/jakis-cixe.webp";
 
 export function Home() {
+  const navigate = useNavigate();
   const [usersData, setUsersData] = useState([]);
 
   useEffect(() => {
@@ -50,17 +52,12 @@ export function Home() {
       <section className="-mt-32 bg-gray-50 px-4 pb-20 pt-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuresData.map(({ color, title, icon, description }) => (
-              <FeatureCard
-                key={title}
-                color={color}
-                title={title}
-                icon={React.createElement(icon, {
-                  className: "w-5 h-5 text-white",
-                })}
-                description={description}
-              />
-            ))}
+            <FeatureCard image={jakeliGerbi} description="ჯაყელთა გერბი" />
+            <FeatureCard image={safara} description="საფარის ფრესკა" />
+            <FeatureCard
+              image={samcxeGerbi}
+              description="სამცხე-საათაბაგოს დროშა"
+            />
           </div>
           <div className="mt-32 flex flex-wrap items-center">
             <div className="mx-auto -mt-8 w-full px-4 md:w-5/12">
@@ -72,26 +69,28 @@ export function Home() {
                 className="mb-3 font-bold"
                 color="blue-gray"
               >
-                Working with us is a pleasure
+                ჯაყელთა სახლის საზოგადოება
               </Typography>
               <Typography className="mb-8 font-normal text-blue-gray-500">
-                Don't let your uses guess by attaching tooltips and popoves to
-                any element. Just make sure you enable them first via
-                JavaScript.
+                ვებ გვერდის მიზანია შეიქმნას საერთო სივრცე, სადაც ჯაყელთა სახლის
+                საზოგადოების წევრები შეძლებენ გაწევრიანებას.
                 <br />
                 <br />
-                The kit comes with three pre-built pages to help you get started
-                faster. You can change the text and images and you're good to
-                go. Just make sure you enable them first via JavaScript.
+                საიტზე რეგისტრაციის შემდეგ, თქვენ შეძლებთ შეავსოთ თქვენი
+                პროფილი, დაწეროთ თვენი მოკლე ბიოგრაფია და საკონტაქტო ინფორმაცია.
+                ამით ჩვენ შევძლებთ ერთმანეთთან ურთიერთობას, სიახლეებისა თუ
+                სხვადასხვა ინფორმაციის გაცვლას, და ჯაყელთა გაერთიანებას.
               </Typography>
-              <Button variant="outlined">read more</Button>
+              <Button variant="outlined" onClick={() => navigate("/sign-up")}>
+                გაწევრიანდი
+              </Button>
             </div>
             <div className="mx-auto mt-24 flex w-full justify-center px-4 md:w-4/12 lg:mt-0">
               <Card className="shadow-lg shadow-gray-500/10">
                 <CardHeader className="relative h-56">
                   <img
                     alt="Card Image"
-                    src="/img/teamwork.jpeg"
+                    src={jakisCixe}
                     className="h-full w-full"
                   />
                 </CardHeader>
@@ -101,12 +100,10 @@ export function Home() {
                     color="blue-gray"
                     className="mb-3 font-bold"
                   >
-                    Top Notch Services
+                    ჯაყის ციხე
                   </Typography>
                   <Typography className="font-normal text-blue-gray-500">
-                    The Arctic Ocean freezes every winter and much of the
-                    sea-ice then thaws every summer, and that process will
-                    continue whatever happens.
+                    ჯაყელთა საგვარეულოს ფუძემდებელ ბეშქენ ჩორჩანელის სამფლობელო
                   </Typography>
                 </CardBody>
               </Card>
