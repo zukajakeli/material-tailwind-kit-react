@@ -59,7 +59,7 @@ export function SignIn() {
               className="mb-4 grid h-28 place-items-center"
             >
               <Typography variant="h3" color="white">
-                Sign In
+                ავტორიზაცია
               </Typography>
             </CardHeader>
             <CardBody className="flex flex-col gap-4">
@@ -89,7 +89,7 @@ export function SignIn() {
             </CardBody>
             <CardFooter className="pt-0">
               <Button variant="gradient" type="submit" fullWidth>
-                Sign In
+                ავტორიზაცია
               </Button>
               <Typography variant="small" className="mt-6 flex justify-center">
                 Don't have an account?
@@ -100,7 +100,7 @@ export function SignIn() {
                     color="blue"
                     className="ml-1 font-bold"
                   >
-                    Sign up
+                   რეგისტრაცია
                   </Typography>
                 </Link>
               </Typography>

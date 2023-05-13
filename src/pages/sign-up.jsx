@@ -59,7 +59,7 @@ export function SignUp() {
             className="mb-4 grid h-28 place-items-center"
           >
             <Typography variant="h3" color="white">
-              Sign Up
+              რეგისტრაცია
             </Typography>
           </CardHeader>
 
@@ -94,9 +94,8 @@ export function SignUp() {
                 variant="gradient"
                 fullWidth
                 type="submit"
-                onClick={handleRegister}
               >
-                Sign Up
+                რეგისტრაცია
               </Button>
 
               <Typography variant="small" className="mt-6 flex justify-center">

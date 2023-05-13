@@ -20,7 +20,7 @@ export function Navbar({ brandName, routes, action }) {
   const [openNav, setOpenNav] = React.useState(false);
   const email = useUser((state) => state.email);
   const resetUser = useUser((state) => state.reset);
-  const isAuthenticated = email.length > 0;
+  const isAuthenticated = email?.length > 0;
 
   const isHidden = (path) =>
     (isAuthenticated && (path === "/sign-up" || path === "/sign-in")) ||

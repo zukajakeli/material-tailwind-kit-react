@@ -40,9 +40,9 @@ FeatureCard.propTypes = {
     "pink",
     "red",
   ]),
-  icon: PropTypes.node.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.node.isRequired,
+  icon: PropTypes.node  ,
+  title: PropTypes.string,
+  description: PropTypes.node,
 };
 
 FeatureCard.displayName = "/src/widgets/layout/feature-card.jsx";
