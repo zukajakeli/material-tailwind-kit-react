@@ -94,7 +94,7 @@ export function SignUp() {
                 variant="gradient"
                 fullWidth
                 type="submit"
-                // onClick={handleRegister}
+                onClick={handleRegister}
               >
                 Sign Up
               </Button>
