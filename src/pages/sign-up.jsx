@@ -85,9 +85,7 @@ export function SignUp() {
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.password)}
               />
-              <div className="-ml-2.5">
-                <Checkbox label="I agree the Terms and Conditions" />
-              </div>
+       
             </CardBody>
             <CardFooter className="pt-0">
               <Button
@@ -99,7 +97,7 @@ export function SignUp() {
               </Button>
 
               <Typography variant="small" className="mt-6 flex justify-center">
-                Already have an account?
+                უკვე დარეგისტრირებული ხარ?
                 <Link to="/sign-in">
                   <Typography
                     as="span"
@@ -107,7 +105,7 @@ export function SignUp() {
                     color="blue"
                     className="ml-1 font-bold"
                   >
-                    Sign in
+                    ავტორიზაცია
                   </Typography>
                 </Link>
               </Typography>
@@ -116,7 +114,7 @@ export function SignUp() {
         </Card>
       </div>
       <div className="container absolute bottom-6 left-2/4 z-10 mx-auto -translate-x-2/4 text-white">
-        <SimpleFooter />
+        {/* <SimpleFooter /> */}
       </div>
     </>
   );

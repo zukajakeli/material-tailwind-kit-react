@@ -83,16 +83,14 @@ export function SignIn() {
                 onChange={formik.handleChange}
                 error={Boolean(formik.errors.password)}
               />
-              <div className="-ml-2.5">
-                <Checkbox label="Remember Me" />
-              </div>
+            
             </CardBody>
             <CardFooter className="pt-0">
               <Button variant="gradient" type="submit" fullWidth>
                 ავტორიზაცია
               </Button>
               <Typography variant="small" className="mt-6 flex justify-center">
-                Don't have an account?
+                არ ხარ დარეგისტრირებული?
                 <Link to="/sign-up">
                   <Typography
                     as="span"
@@ -109,7 +107,7 @@ export function SignIn() {
         </form>
       </div>
       <div className="container absolute bottom-6 left-2/4 z-10 mx-auto -translate-x-2/4 text-white">
-        <SimpleFooter />
+        {/* <SimpleFooter /> */}
       </div>
     </>
   );
