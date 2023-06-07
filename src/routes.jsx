@@ -24,10 +24,16 @@ export const routes = [
     path: "/home",
     element: <Home />,
   },
+  // {
+  //   icon: NewspaperIcon,
+  //   name: "ჩვენ შესახებ",
+  //   path: "/about-us",
+  //   element: <AboutUs />,
+  // },
   {
     icon: NewspaperIcon,
-    name: "ჩვენ შესახებ",
-    path: "/about-us",
+    name: "სიახლეები",
+    path: "/news",
     element: <AboutUs />,
   },
   {

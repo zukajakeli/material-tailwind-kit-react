@@ -16,6 +16,7 @@ export function Profile() {
     birthYear: "",
     bio: "",
     imageUrl: null,
+    isAdmin: false
   });
   const { name, surname, location, birthYear, bio, imageUrl } = userData;
 

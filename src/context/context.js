@@ -7,6 +7,7 @@ export const useUser = create((set) => ({
   uid: "",
   email: "",
   isAuthenticated: false,
+  isAdmin: true,
   setUserInfo: (payload) =>
     set((state) => ({
       ...state,

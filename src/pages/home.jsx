@@ -27,7 +27,7 @@ export function Home() {
 
   return (
     <>
-      <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32">
+      <div className="relative flex h-screen content-center items-center justify-center pb-32 pt-16">
         <div className="absolute top-0 h-full w-full bg-[url('https://www.turebi.ge/uploads/photos/tours1/large/59692_1.jpg')] bg-cover bg-center" />
         <div className="absolute top-0 h-full w-full bg-black/50 bg-cover bg-center" />
         <div className="max-w-8xl container relative mx-auto">
@@ -38,7 +38,7 @@ export function Home() {
                 color="white"
                 className="mb-6 font-black"
               >
-                ჯაყელთა სახლი
+                ჯაყელ-ათაბაგთა სამთავრო სახლი
               </Typography>
               {/* <Typography variant="lead" color="white" className="opacity-80">
                 This is a simple example of a Landing Page you can build using
@@ -112,7 +112,7 @@ export function Home() {
         </div>
       </section>
       {usersData.length > 0 && (
-        <section className="px-4 pt-20 pb-48">
+        <section className="px-4 pb-48 pt-20">
           <div className="container mx-auto">
             <PageTitle heading="ჩვენი წევრები"> </PageTitle>
             <div className="mt-24 grid grid-cols-1 gap-12 gap-x-24 md:grid-cols-2 xl:grid-cols-4">

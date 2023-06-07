@@ -14,6 +14,8 @@ import {
   SignIn,
   SignUp,
 } from "./pages";
+import News from "./pages/news";
+import AddNews from "./pages/add-news";
 
 function App() {
   const auth = getAuth();
@@ -40,7 +42,8 @@ function App() {
       </div>
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/add-news" element={<AddNews />} />
         <Route path="/members" element={<Members />} />
         <Route path="profile">
           <Route path=":userId?" element={<Profile />} />
