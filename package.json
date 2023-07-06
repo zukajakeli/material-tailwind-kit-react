@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.0.12",
     "@material-tailwind/react": "^1.2.4",
     "axios": "^1.2.5",
+    "cloudinary": "^1.37.3",
     "dotenv": "^16.0.3",
     "firebase": "^9.16.0",
     "formik": "^2.2.9",

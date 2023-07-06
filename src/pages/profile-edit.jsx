@@ -12,6 +12,12 @@ import { useEffect, useState } from "react";
 import profileImage from "../../public/img/profile-placeholder.png";
 import { Footer } from "@/widgets/layout";
 import "../../public/css/profile-edit.css";
+import axios from "axios";
+
+const REACT_APP_CLOUDINARY_CLOUD_NAME = "ddafpg8qo";
+const REACT_APP_CLOUDINARY_API_KEY = "565424961596542";
+const REACT_APP_CLOUDINARY_API_SECRET = "-WESvgyO_kiGVg0b4AdEFcROrzE";
+const REACT_APP_CLOUDINARY_UPLOAD_PRESET = "react-upload";
 
 export function ProfileEdit() {
   const [image, setImage] = useState({ preview: "", data: "" });
@@ -45,9 +51,28 @@ export function ProfileEdit() {
         formData.append(`${key}`, values[key]);
       });
       formData.append("image", image.data);
-      api.post(endpoints.UPDATE_USER, formData).then(() => showAlert());
+
+      upload(formData, image.data);
+      // api.post(endpoints.UPDATE_USER, formData).then(() => showAlert());
     },
   });
+
+  const upload = async (formData, imageData) => {
+    const cloudFormData = new FormData();
+    cloudFormData.append("upload_preset", REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+    cloudFormData.append("cloud_name", REACT_APP_CLOUDINARY_CLOUD_NAME);
+    cloudFormData.append("folder", "Cloudinary-React");
+    cloudFormData.append("file", imageData);
+
+    const cloudinaryRes = await axios.post(
+      `https://api.cloudinary.com/v1_1/${REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+      cloudFormData
+    );
+    const imageUrl = cloudinaryRes.url;
+    formData.append("imageUrl", imageUrl);
+
+    api.post(endpoints.UPDATE_USER, formData).then(() => showAlert());
+  };
 
   const handleFileChange = (e) => {
     const img = {
@@ -100,7 +125,7 @@ export function ProfileEdit() {
                             image.preview
                               ? image.preview
                               : imageUrl
-                              ? `${BASE_URL}/images/${imageUrl}`
+                              ? `${imageUrl}`
                               : profileImage
                           }
                           alt="Profile picture"
