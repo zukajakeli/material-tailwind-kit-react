@@ -50,7 +50,6 @@ export function ProfileEdit() {
       Object.keys(values).forEach((key) => {
         formData.append(`${key}`, values[key]);
       });
-      formData.append("image", image.data);
 
       upload(formData, image.data);
       // api.post(endpoints.UPDATE_USER, formData).then(() => showAlert());
@@ -68,7 +67,7 @@ export function ProfileEdit() {
       `https://api.cloudinary.com/v1_1/${REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
       cloudFormData
     );
-    const imageUrl = cloudinaryRes.url;
+    const imageUrl = cloudinaryRes?.data?.url;
     formData.append("imageUrl", imageUrl);
 
     api.post(endpoints.UPDATE_USER, formData).then(() => showAlert());
