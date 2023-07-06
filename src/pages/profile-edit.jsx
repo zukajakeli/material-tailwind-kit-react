@@ -46,17 +46,13 @@ export function ProfileEdit() {
     },
     onSubmit: (values) => {
       console.log("bio", values);
-      const formData = new FormData();
-      Object.keys(values).forEach((key) => {
-        formData.append(`${key}`, values[key]);
-      });
 
-      upload(formData, image.data);
+      upload({ ...values }, image.data);
       // api.post(endpoints.UPDATE_USER, formData).then(() => showAlert());
     },
   });
 
-  const upload = async (formData, imageData) => {
+  const upload = async (formValues, imageData) => {
     const cloudFormData = new FormData();
     cloudFormData.append("upload_preset", REACT_APP_CLOUDINARY_UPLOAD_PRESET);
     cloudFormData.append("cloud_name", REACT_APP_CLOUDINARY_CLOUD_NAME);
@@ -68,9 +64,9 @@ export function ProfileEdit() {
       cloudFormData
     );
     const imageUrl = cloudinaryRes?.data?.url;
-    formData.append("imageUrl", imageUrl);
+    formValues.imageUrl = imageUrl;
 
-    api.post(endpoints.UPDATE_USER, formData).then(() => showAlert());
+    api.post(endpoints.UPDATE_USER, formValues).then(() => showAlert());
   };
 
   const handleFileChange = (e) => {
